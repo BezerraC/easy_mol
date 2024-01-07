@@ -1,6 +1,6 @@
 # Easy Mol
 
-Easy Mol is a Django project that get the molecules data from pubchem and chembl and show the result and can download it
+Easy Mol simplifies the process of obtaining comprehensive molecular details by seamlessly integrating with the PubChem database
 
 ## Stack used
 
@@ -8,11 +8,14 @@ Easy Mol is a Django project that get the molecules data from pubchem and chembl
 
 **Back-end:** Python
 
+**API:** PubChempy
+
 ## Functionalities
 
-- Web Scraping Data (Selenium)
+- Using Rest API
 - Download Options (pdf, csv, json)
 - Responsive
+- Always Dark Mode 🌟
 
 ## Author
 

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Searching Molecules</title>
+</head>
+<body>
+    <style rel="stylesheet">
+        h2 {
+            font-size: 18px;
+        }
+        p {
+         font-size: 16px;
+         color: #666;
+         line-height: 1.8;
+         margin-top: 0;
+        }    
+   </style>
+    {% for data in data_list %}
+        <h2>Data for {{ data.Molecula }}</h2>
+        <p>
+            <b>Description:</b> {{ data.Descriptions }}<br>
+            <b>Estructure IMG:</b> {{ data.Estructure_IMG }}<br>
+            <b>Formula:</b> {{ data.Molecular_Formula }}<br>
+            <b>Synonyms:</b> {{ data.Synonyms }}<br>
+            <b>IUPAC:</b> {{ data.IUPAC }}<br>
+            <b>InCh:</b> {{ data.InCh }}<br>
+            <b>InChKey:</b> {{ data.InChKey }}<br>
+            <b>TSPA:</b> {{ data.TSPA }}<br>
+            <b>Linpiski violations:</b> {{ data.Linpiski_violations }}<br>
+            <b>LogD:</b> {{ data.LogD }}<br>
+            <b>Canonical SMILE:</b> {{ data.Canonical_SMILE }}<br>
+            <b>Monoisotopic Mass:</b> {{ data.Monoisotopic_Mass }}<br>
+            <b>Molecular Weight:</b> {{ data.Molecular_Weight }}<br>
+            <b>H-bond Acceptors:</b> {{ data.Hbond_Acceptors }}<br>
+            <b>H-bond Donnors:</b> {{ data.Hbond_Donnors }}<br>
+            <b>Rotatable bonds:</b> {{ data.Rotatable_bonds }}<br>
+        </p>
+        <hr>
+    {% endfor %}
+</body>
+</html>

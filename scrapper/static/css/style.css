@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+body::after {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+body::before {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+.header-background{
+    background: linear-gradient(to top,#000 0,hsla(0,0%,100%,0) 100%),linear-gradient(to right,rgb(192.5 192.5 192.5/.08) 0,rgb(192.5 192.5 192.5/.08) 100%);
+    padding: 8rem;
+    position: absolute;
+    width: 100%;
+}
+
+.footer-background{
+  background: linear-gradient(to top,#000 0,hsla(0,0%,100%,0) 100%),linear-gradient(to right,rgb(192.5 192.5 192.5/.08) 0,rgb(192.5 192.5 192.5/.08) 100%);
+  position: absolute;
+  width: 100%;
+}
+
+.fs-0{
+    font-size: 4.0rem !important;
+}
+
+.nav-btn{
+  background: #1F1F1F !important;
+}
+
+.mb-15{
+  margin-bottom: 22rem;
+}
+
+.font-bold {
+    font-weight: 800!important;
+}
+
+.pgb {
+  padding-bottom: 3px !important;
+}
+
+.bg-dark-nav {
+    background-color: #000;
+    box-shadow: 0 1px 0 0 hsla(0,0%,100%,.1)
+}
+
+.bg-dark-footer {
+  background-color: #000;
+  box-shadow: 0 -1px 0 0 hsla(0,0%,100%,.1)
+}
+
+.bg-dark-body {
+    background-color: #000;
+}
+
+.logo-white {
+    filter: brightness(6.5);
+}
+
+.linear-wipe {
+    background: linear-gradient(
+        135deg,
+        #007cf0 20%,
+        #00dfd8 30%,
+        #7928ca 70%,
+        #ff0080 80%,
+        #FFF 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    background-size: 500% auto;
+    animation: textShine 5s ease-in-out infinite alternate;
+  }
+
+  .text-nav{
+    color: #a1a1a1 !important;
+    font-size: 14px !important;
+    border-radius: 15px !important;
+    padding: 6px 15px !important;
+    margin-right: 5px !important;
+  }
+
+  .text-nav:hover{
+    color: #DEDEDE !important;
+    background-color: #1F1F1F !important;
+    border-radius: 15px ;
+  }
+
+  .nav-active{
+    color: #DEDEDE !important;
+    background-color: #1F1F1F !important;
+    border-radius: 15px ;
+  }
+
+  .btn-custom-d-wrapper {
+    position: relative;
+  }
+  
+  .btn-custom-d {
+    display: block !important;
+    line-height: 32px !important;
+    font-weight: 700;
+    padding: 5px 15px !important;
+    color: white !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    position: relative;
+    z-index: 1;
+    background-color: #000 !important;
+  }
+  
+  .btn-custom-d-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+    background: linear-gradient(
+        135deg,
+      #007cf0 20%,
+      #00dfd8 30%,
+      #7928ca 70%,
+      #ff0080 80%,
+      #FFF 100%
+    );
+    background-size: 900% auto;
+    border-radius: 10px !important;
+    animation: btnCustomAnimateBorder 5s ease-in-out infinite alternate;
+    z-index: 0;
+    /* transform: translate(-1px, -1px); */
+    transform: translate(-1px, -1px);
+  }
+  
+  .btn-custom-d:hover{
+    color: #000!important;
+    background-color: transparent !important;
+    transition: 0.2s ease-in;
+  }
+  
+  .btn-custom-d-wrapper:hover .btn-custom-d-bg {
+    transition: 0.2s ease-in;
+  }
+  
+.btn-custom {
+    background-color: #4CAF50 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.btn-custom:hover{
+    background-color: #3e8e41 !important;
+}
+
+.m-8 {
+    margin-top: 15rem !important;
+}
+
+select, input {
+    padding: 10px !important;
+    border: 2px solid hsla(0,0%,100%,.1) !important;
+    background-color: #000 !important;
+}
+
+.mb-f {
+    margin-bottom: 100px;
+}
+
+select:focus, input:focus {
+    border: 2px solid #f8f9fa79 !important;
+    box-shadow: none !important;
+    /* smooth green 4CAF50 */
+}
+
+#loading-bar-container {
+    width: 100%;
+    height: 3px;
+    background-color: #000 !important;
+    margin-top: 0px;
+}
+
+#loading-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(
+        135deg,
+      #007cf0 20%,
+      #00dfd8 30%,
+      #7928ca 70%,
+      #ff0080 80%,
+      #FFF 100%
+    );
+    background-size: 900% auto;
+    animation: btnCustomAnimateBorder 5s ease-in-out infinite alternate;
+    /* background-color: #4CAF50; */
+    transition: width 0.3s;
+}
+
+.container-result {
+  position: relative;
+  border-radius: 15px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  overflow-y: scroll;
+  height: 650px;
+  color: #DEDEDE;
+  background: rgb(31 31 31 / 50%); /* Cor de fundo com transparência */
+  backdrop-filter: blur(15px); /* Efeito de desfoque no fundo */
+  border: 1px solid hsla(0, 0%, 100%, 0.1); /* Borda com transparência */
+}
+/* .scroll-container {
+    overflow-y: auto;
+    height: 100%;
+}
+.scroll-container::-webkit-scrollbar {
+    display: none;
+} */
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #F1F1F1;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(180, 180, 180); 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(128, 128, 128); 
+  }
+
+  ::placeholder {
+    color: #f8f9fa79 !important;
+    opacity: 1; /* Firefox */
+  }
+  
+  ::-ms-input-placeholder { /* Edge 12 -18 */
+    color: #f8f9fa79 !important;
+  }
+
+  @media only screen and (max-width: 576px) {
+    .m-8 {
+      margin-top: 5rem !important;
+    }
+    .mb-15 {
+      margin-bottom: 10rem !important;
+    }
+  }
+
+  @media only screen and (max-width: 1410px) {
+    .mb-15 {
+      margin-bottom: 40rem !important;
+    }
+  }
+
+
+  @keyframes btnCustomAnimateBorder {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+
+
+@keyframes textShine {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}

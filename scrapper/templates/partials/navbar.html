@@ -1,0 +1,18 @@
+{% load static %}
+<div class="container-md">
+<nav class="navbar navbar-expand-lg ">
+    <div class="container-fluid">
+      <a class="text-light navbar-brand fw-bold" href="/"><img class="logo-white" src="{% static '/img/logonav.png' %}" alt="Easy Mol Logo" width="130"></a>
+      <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="text-nav nav-link my-1 my-sm-0 {% if current_page == 'home' %}nav-active{% endif %} " aria-current="page" href="/">Home</a>
+          <a class="text-nav nav-link my-1 my-sm-0 {% if current_page == 'features' %}nav-active{% endif %}" href="/features/">Features</a>
+          <a class="text-nav nav-link my-1 my-sm-0 {% if current_page == 'about' %}nav-active{% endif %}" href="/about/">About</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>

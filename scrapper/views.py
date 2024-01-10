@@ -11,8 +11,6 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.pdfgen import canvas
 
-# from rdkit import Chem
-# from rdkit.Chem import Draw
 # from reportlab.pdfgen import canvas
 
 #from xhtml2pdf import pisa
@@ -28,22 +26,15 @@ def search(request):
         data_list = []
 
         for composto in compostos_lista:
-            try:
                 # Obtém os resultados para cada composto
                 results = pcp.get_compounds(composto.strip(), 'name')
                 
                 # Verifica se há resultados antes de imprimir as informações
                 if results:
                     for compound in results:
-                        # mol = Chem.MolFromSmiles(compound.canonical_smiles)
-                        # img = Draw.MolToImage(mol)
-                        #img_path = f"scrapper/static/img/img_mols/{composto.strip()}_image.png"
-                        # img_dir = os.path.join(BASE_DIR, 'static', 'img', 'img_mols')
-                        # if not os.path.exists(img_dir):
-                        #     os.makedirs(img_dir)
-
-                        # img_path = os.path.join(img_dir, f'{composto.strip()}_image.png')
-                        # img.save(img_path)
+                        # Structure IMG
+                        cid = compound.cid
+                        img_path = f"https://pubchem.ncbi.nlm.nih.gov/image/imgsrv.fcgi?cid={cid}&t=l"
                         # Synonyms
                         synonyms_list = compound.synonyms
                         synonyms = ", ".join(synonyms_list)
@@ -56,8 +47,7 @@ def search(request):
 
                         data = {
                             'Molecula': composto.strip(),
-                            # Quero que a imagem mol fique aqui img_path
-                            #'Image_Path': img_path,
+                            'Image_Path': img_path,
                             'Synonyms': synonyms,
                             'Molecular_Formula': compound.molecular_formula,
                             'Molecular_Weight': compound.molecular_weight,
@@ -77,12 +67,11 @@ def search(request):
 
                         data_list.append(data)
                 else:
-                    print(f"Composto {composto} não encontrado.")
+                    error_message = f"Compound {composto.strip()} not found."
+                    print(error_message)
+                    return render(request, 'home.html', {'title': 'Searching Molecules', 'current_page': 'home', 'error_message': error_message})
+                   
 
-            except pcp.NotFoundError:
-                print(f"Composto {composto} não encontrado.")
-            except pcp.PubChemPyError as e:
-                print(f"Erro ao processar o composto {composto}: {e}")
 
         # Adiciona a lista de dados capturados ao contexto
         context = {
@@ -236,4 +225,4 @@ def features(request):
     return render(request, 'partials/coming_soon.html', {'title': 'Coming Soon', 'current_page': 'features'})
 
 def about(request):
-    return render(request, 'partials/coming_soon.html', {'title': 'Coming Soon', 'current_page': 'about'})
+    return render(request, 'about.html', {'title': 'About', 'current_page': 'about'})

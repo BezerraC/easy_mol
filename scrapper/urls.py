@@ -10,7 +10,7 @@ urlpatterns = [
             path('download/', views.download_file, name='download_file'),
             path('features/', views.features, name='features'),
             path('about/', views.about, name='about'),
-            path('test/', views.test, name='test'),
+            #path('test/', views.test, name='test'),
 
         ]
 

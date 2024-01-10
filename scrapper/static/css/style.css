@@ -25,6 +25,19 @@ body::before {
   width: 100%;
 }
 
+ .separator {
+   height: 1px;
+   background-color: #000;
+   border-top: 2px solid hsla(0,0%,100%,.1);
+   box-shadow: 0 -1px 0 0 hsla(0,0%,100%,.1);
+   margin: 20px 0;
+  
+}
+
+.txt-light{
+  color: #ededed !important;
+}
+
 .fs-0{
     font-size: 4.0rem !important;
 }

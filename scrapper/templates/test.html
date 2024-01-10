@@ -2,13 +2,16 @@
 {% load static %}
 
 {% block content %}
-<h1 class="text-center text-light mt-5 fw-bold fs-1">Search completed successfully!</h1>
+<h1 class="text-center txt-light mt-5 fw-bold fs-1">Search completed successfully!</h1>
 
  <div class="container-result mt-5 shadow-sm ">
-  <div class="scroll-container">
+  <div class="scroll-container lh-lg">
         <h2 class="fw-bold">Data for Ozone</h2>
-        <p class="lh-lg">
-            <b>Estructure IMG:</b> Test<br>
+        <p>
+          <div class="d-flex flex-column">
+           <b>Estructure IMG:</b>
+            <img src="https://pubchem.ncbi.nlm.nih.gov/image/imgsrv.fcgi?cid=24823&t=l" width="200" class="rounded-3" alt="Ozone Image">
+            </div>
             <b>Formula:</b> Test<br>
             <b>Synonyms:</b> Test<br>
             <b>IUPAC:</b> Test<br>
@@ -48,7 +51,7 @@
 </div>
  
  
- <div class="text-center mt-5 mb-3 text-light">
+ <div class="text-center mt-5 mb-3 txt-light">
  <h4>Download Option</h4>
 </div>
 
@@ -57,7 +60,7 @@
 
    <div class=" col col-md-3">
 
-    <select class="form-select mb-3 bg-dark text-light" id="download_type" name="download_type" aria-label="Large select example">
+    <select class="form-select mb-3 bg-dark txt-light" id="download_type" name="download_type" aria-label="Large select example">
       <option value="" selected disabled>Choose your format</option>
       <option value="pdf">PDF</option>
       <option value="csv">CSV</option>

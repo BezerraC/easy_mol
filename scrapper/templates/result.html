@@ -15,7 +15,14 @@
             <div class="d-flex flex-column">
                 <b>Estructure IMG:</b> <img src="{{ data.Image_Path }}" width="200" class="rounded-3" alt="{{ data.Molecula }} Image">
             </div>
-            <b>Synonyms:</b> {{ data.Synonyms }}<br>
+           
+            <div id="synonyms-container-{{ data.Molecula }}" class="synonyms-container">
+                 <b>Synonyms:</b>  {{ data.Synonyms }}
+            </div>
+            {% if data.Synonyms|length > 200 %}
+                <button class="btn btn-dark" id="toggle-button-{{ data.Molecula }}" onclick="toggleSynonyms('{{ data.Molecula }}')">Show More</button>
+            {% endif %}
+            <br>
             <b>Molecular Formula:</b> {{ data.Molecular_Formula }}<br>
             <b>Molecular Weight:</b> {{ data.Molecular_Weight }}<br>
             <b>Canonical SMILES:</b> {{ data.Canonical_SMILES }}<br>
@@ -24,7 +31,7 @@
             <b>InChIKey:</b> {{ data.InChIKey }}<br>
             <b>IUPAC:</b> {{ data.IUPAC }}<br>
             <b>XLogP:</b> {{ data.XLogP }}<br>
-            {% comment %} <b>Linpiski violations:</b> {{ data.Linpiski_violations }}<br> {% endcomment %}
+            <b>Linpiski violations:</b> {{ data.Linpiski_violations }}<br>
             <b>Exact Mass:</b> {{ data.Exact_Mass }}<br>
             <b>Monoisotopic Mass:</b> {{ data.Monoisotopic_Mass }}<br>
             <b>TPSA:</b> {{ data.TPSA }}<br>
@@ -69,4 +76,31 @@
         <button class="mt-3 btn btn-dark" style="margin:auto">Go Back</button>
     </a>
 </div>
+
+
+<script>
+    function toggleSynonyms(molecule) {
+        var container = document.getElementById('synonyms-container-' + molecule);
+        var button = document.querySelector('#toggle-button-' + molecule);
+
+        if (container.style.whiteSpace === 'normal' || !container.style.whiteSpace) {
+            container.style.whiteSpace = 'nowrap';
+            container.style.overflow = 'hidden';
+            container.style.textOverflow = 'ellipsis';
+            button.textContent = 'Show More';
+        } else {
+            container.style.whiteSpace = 'normal';
+            container.style.overflow = 'visible';
+            container.style.textOverflow = 'unset';
+            button.textContent = 'Show Less';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        {% for data in data_list %}
+            toggleSynonyms("{{ data.Molecula }}");
+        {% endfor %}
+    });
+    
+</script>
 {% endblock %}

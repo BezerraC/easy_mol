@@ -21,17 +21,48 @@ def search(request):
     if request.method == 'POST':
         
         compostos = request.POST.get('molecules')
+        print(f'compostos: {compostos}')
         compostos_lista = compostos.title().split(',')
 
         data_list = []
-
+        queried_compounds = set()
+        print(f'compostos_lista: {compostos_lista}')
         for composto in compostos_lista:
+                if composto.strip() in queried_compounds:
+                    continue
+
+                queried_compounds.add(composto.strip())
+
                 # Obtém os resultados para cada composto
                 results = pcp.get_compounds(composto.strip(), 'name')
-                
-                # Verifica se há resultados antes de imprimir as informações
+                print(f'results: {results}')
+                print(f'composto.strip: {composto.strip()}')
+                # Verifica  se há resultados antes de imprimir as informações
                 if results:
                     for compound in results:
+                        # Lipinski's rule of five conditions
+                        h_bond_donors = compound.h_bond_donor_count
+                        h_bond_acceptors = compound.h_bond_acceptor_count
+                        molecular_mass = float(compound.molecular_weight)
+                        partition_coefficient = compound.xlogp
+
+                        # Check Lipinski's rule of five
+                        conditions_met = 0
+
+                        if h_bond_donors <= 5:
+                            conditions_met += 1
+
+                        if h_bond_acceptors <= 10:
+                            conditions_met += 1
+
+                        if molecular_mass < 500:
+                            conditions_met += 1
+
+                        if partition_coefficient <= 5:
+                            conditions_met += 1
+
+                        lipinski_pass = conditions_met >= 3
+                        lipinski_rule_result = "0" if lipinski_pass else "1"
                         # Structure IMG
                         cid = compound.cid
                         img_path = f"https://pubchem.ncbi.nlm.nih.gov/image/imgsrv.fcgi?cid={cid}&t=l"
@@ -63,6 +94,7 @@ def search(request):
                             'Hbond_Donors': compound.h_bond_donor_count,
                             'Hbond_Acceptors': compound.h_bond_acceptor_count,
                             'Rotatable_Bonds': compound.rotatable_bond_count,
+                            'Linpiski_violations': lipinski_rule_result,
                         }
 
                         data_list.append(data)

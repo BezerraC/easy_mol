@@ -1,21 +1,44 @@
 import json
-import os
-from pathlib import Path
 
 import pandas as pd
 import pubchempy as pcp
+import requests
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.template.loader import render_to_string
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.pdfgen import canvas
 
 # from reportlab.pdfgen import canvas
-
 #from xhtml2pdf import pisa
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+# Função para extrair ícones, descrição de Chemical Safety e descrição do composto que não consta do pacote pubchempy
+def extrair_info_composto(data):
+    icons = []
+    chemical_safety_description = ""
+    compound_description = ""
+
+    for section in data.get("Record", {}).get("Section", []):
+        if section.get("TOCHeading") == "Chemical Safety":
+            for icon_data in section.get("Information", []):
+                if icon_data.get("Name") == "Chemical Safety":
+                    string_with_markup = icon_data.get("Value", {}).get("StringWithMarkup", [])
+                    for markup_item in string_with_markup:
+                        for icon in markup_item.get("Markup", []):
+                            if icon["Type"] == "Icon":
+                                icons.append({
+                                    "URL": icon.get("URL"),
+                                    "Extra": icon.get("Extra")
+                                })
+            chemical_safety_description = section.get("Description", "")
+        elif section.get("TOCHeading") == "Names and Identifiers":
+            for record_section in section.get("Section", []):
+                if record_section.get("TOCHeading") == "Record Description":
+                    string_with_markup = record_section.get("Information", [{}])[0].get("Value", {}).get("StringWithMarkup", [])
+                    compound_description = string_with_markup[0].get("String", "")
+                    break  # Sai do loop após encontrar a seção Record Description
+
+    return icons, chemical_safety_description, compound_description
 
 def search(request):
     if request.method == 'POST':
@@ -76,8 +99,24 @@ def search(request):
                         monoisotopic_mass_f = float(compound.monoisotopic_mass)
                         monoisotopic_mass = "{:.2f}".format(monoisotopic_mass_f)
 
+                        # Chemical Safety
+                        coumpund_data_url = f'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{cid}/JSON/'
+                        compound_info = requests.get(coumpund_data_url)
+
+                        #print (compound_info.json())
+
+                        icons_chemical_safety, chemical_safety_description, compound_description = extrair_info_composto(compound_info.json())
+                        #print(icons_chemical_safety)
+                        print("Ícones:", icons_chemical_safety)
+                        #print("Descrição Chemical Safety:", chemical_safety_description)
+                        print("Descrição do Composto:", compound_description)
+                    
                         data = {
+                            'ChemicalSafetyIcons': icons_chemical_safety,
+                            'ChemicalSafetyDescription': chemical_safety_description,
+                            'CompoundDescription': compound_description,
                             'Molecula': composto.strip(),
+                            'CID': cid,
                             'Image_Path': img_path,
                             'Synonyms': synonyms,
                             'Molecular_Formula': compound.molecular_formula,
@@ -149,42 +188,6 @@ def download_file(request):
     dfs = []
     if download_type == 'pdf':
         # Lógica para gerar o PDF
-        # template_path = 'download_template.html'
-        # data_list = request.session.get('data_list', [])
-        # context = {'data_list': data_list}
-        # response = HttpResponse(content_type='application/pdf')
-        # response['Content-Disposition'] = 'attachment; filename="downloaded_file.pdf"'
-
-        # template = get_template(template_path)
-        # html = template.render(context)
-
-        # # Substitua caracteres especiais no HTML
-        # html = replace_special_characters(html)
-
-        # pisa_status = pisa.CreatePDF(html, dest=response, encoding='utf-8')
-
-        # if pisa_status.err:
-        #     return HttpResponse('Erro ao gerar o PDF', status=500)
-
-        # Gerar PDF com ReportLab
-        # c = canvas.Canvas(response, pagesize=letter, bottomup=0)
-        # textob = c.beginText()
-        # textob.setTextOrigin(inch, inch)
-        # textob.setFont("Helvetica", 12)
-
-        # # Adicione os dados ao objeto textob
-        # for item in data_list:
-        #     for key, value in item.items():
-        #         textob.textLine(f"{key}: {value}")
-        #     textob.textLine("--------------------")
-
-        # # Adicione o texto ao canvas
-        # c.drawText(textob)
-        # c.showPage()
-        # c.save()
-
-        # return response
-
         # Recupera a data_list da sessão
         data_list = request.session.get('data_list', [])
 

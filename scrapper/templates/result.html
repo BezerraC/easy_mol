@@ -10,12 +10,25 @@
     <div class="scroll-container lh-lg">
 
         {% for data in data_list %}
-        <h2 class="fw-bold">Data for {{ data.Molecula }}</h2>
+        <div class="d-flex flex-row">
+            <h2 class="fw-bold">Data for {{ data.Molecula }}</h2> <p class="ms-2 fs-6">{{ data.CID }}</p>
+        </div>
         <p>
             <div class="d-flex flex-column">
                 <b>Estructure IMG:</b> <img src="{{ data.Image_Path }}" width="200" class="rounded-3" alt="{{ data.Molecula }} Image">
             </div>
-           
+
+            <b>Chemical Safety: </b>
+            <div class="d-flex flex-row">
+                {% for icon_data in data.ChemicalSafetyIcons %}
+                <div class="d-flex flex-column align-items-center me-2">
+                    <img style="filter: invert(1) hue-rotate(180deg);" src="{{ icon_data.URL }}" alt="{{ icon_data.Extra }}" title="{{ icon_data.Extra }}" width="70" class="rounded-3 m-1">
+                    <p>{{ icon_data.Extra }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <b>Desciption: </b>
+            {{ data.CompoundDescription }}
             <div id="synonyms-container-{{ data.Molecula }}" class="synonyms-container">
                  <b>Synonyms:</b>  {{ data.Synonyms }}
             </div>

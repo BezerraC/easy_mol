@@ -68,7 +68,7 @@ def search(request):
                         img_path = f"https://pubchem.ncbi.nlm.nih.gov/image/imgsrv.fcgi?cid={cid}&t=l"
                         # Synonyms
                         synonyms_list = compound.synonyms
-                        synonyms = ", ".join(synonyms_list)
+                        synonyms = "; ".join(synonyms_list)
                         # Exact mass
                         exact_mass_f = float(compound.exact_mass)
                         exact_mass = "{:.2f}".format(exact_mass_f)

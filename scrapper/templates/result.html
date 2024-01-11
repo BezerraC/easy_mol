@@ -18,7 +18,11 @@
                 <b>Estructure IMG:</b> <img src="{{ data.Image_Path }}" width="200" class="rounded-3" alt="{{ data.Molecula }} Image">
             </div>
 
+            {% if data.ChemicalSafetyIcons %}
             <b>Chemical Safety: </b>
+            {% else %}
+            <b>Safe Compound</b>
+            {% endif %}
             <div class="d-flex flex-row">
                 {% for icon_data in data.ChemicalSafetyIcons %}
                 <div class="d-flex flex-column align-items-center me-2">

@@ -81,7 +81,7 @@ def search(request):
                         if molecular_mass < 500:
                             conditions_met += 1
 
-                        if partition_coefficient <= 5:
+                        if partition_coefficient is None or partition_coefficient <= 5:
                             conditions_met += 1
 
                         lipinski_pass = conditions_met >= 3

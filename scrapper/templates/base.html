@@ -71,13 +71,10 @@
                     // Esconde a barra de progresso quando a requisição AJAX é concluída com sucesso
                     $('#loading-bar-container').fadeOut(500);
                     
-                    // Aqui você pode adicionar qualquer lógica adicional que precisa ser executada após a conclusão da requisição.
                 },
                 error: function (error) {
                     // Esconde a barra de progresso em caso de erro
                     $('#loading-bar-container').fadeOut(500);
-                    
-                    // Aqui você pode tratar erros, se necessário
                 }
             });
         });

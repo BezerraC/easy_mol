@@ -10,7 +10,7 @@
 
 > Simply enter the names of the molecules you are interested in, and Easy Mol will fetch detailed information from the PubChem database, providing you with a wealth of data
 
-[View the project dployed](easy-mol.vercel.app)
+[View the project dployed](https://easy-mol.vercel.app)
 
 ### Adjustments and improvements
 
